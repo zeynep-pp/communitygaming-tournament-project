@@ -1,6 +1,7 @@
 type User {
     id: ID!
     username: String
+    password: String
     email: String
     tournaments: [Tournament]
 }

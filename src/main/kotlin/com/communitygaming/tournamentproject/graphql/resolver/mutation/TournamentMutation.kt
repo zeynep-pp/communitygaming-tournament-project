@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.RequestBody
 import javax.validation.Valid
 import javax.validation.constraints.NotNull
+import javax.validation.constraints.Size
 
 @Component
 @Validated
@@ -27,7 +28,7 @@ class TournamentMutation (
         return tournamentService.partialUpdate(tournament)
     }*/
 
-    fun deleteTournament(@NotNull  id: String): Boolean {
+    fun deleteTournament(@NotNull @Size(min = 1, max = 50) id: String): Boolean {
         return tournamentService.delete(id)
     }
 

@@ -1,11 +1,11 @@
 type Tournament {
-    userId:  ID!
     tournamentName: String!
+    userId: String!
 }
 
 input CreateTournamentInput {
     tournamentName: String!,
-    userId: String!,
+    userId: ID!,
 }
 
 extend type Query {
