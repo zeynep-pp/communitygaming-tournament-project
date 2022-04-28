@@ -7,14 +7,10 @@ import javax.validation.constraints.Size
 
 data class CreateTournamentInput(
 
-    @Id
-    @field:NotNull
-    var id: String? = null,
-
     @field:NotNull
     var tournamentName: String? = null,
 
     @field:NotNull
-    var userOwnerId: String? = null,
+    var userId: String? = null,
 
 )

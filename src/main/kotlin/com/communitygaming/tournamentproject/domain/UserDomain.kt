@@ -13,7 +13,7 @@ data class UserDomain (
 
     @Indexed(unique=true)
     @NonNull
-    var email:String,
+    var email:String? = null,
     var username: String? = null,
     var password: String? = null,
 ) {

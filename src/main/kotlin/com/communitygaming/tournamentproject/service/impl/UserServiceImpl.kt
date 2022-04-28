@@ -1,6 +1,7 @@
 package com.communitygaming.tournamentproject.service.impl
 
 
+import com.communitygaming.tournamentproject.domain.UserDomain
 import com.communitygaming.tournamentproject.graphql.input.RegisterInput
 import com.communitygaming.tournamentproject.graphql.type.Tournament
 import com.communitygaming.tournamentproject.graphql.type.User
@@ -25,13 +26,13 @@ class UserServiceImpl (
 
     private val log = LoggerFactory.getLogger(javaClass);
 
-    @CacheEvict(value = ["tournaments"], allEntries = true)
     override fun save(userDto: RegisterInput): User {
-        log.debug("Request to save User: $userDto")
-        var user = userMapper.toEntity(userDto)
-        user = userRepository.save(user)
+        val user = UserDomain(userDto.username, userDto.password, userDto.email )
+        user.id = UUID.randomUUID().toString()
+        userRepository.save(user)
         return userMapper.toDto(user)
     }
+
 
 
     override fun partialUpdate(id: String,userDto: RegisterInput): Optional<User> {
@@ -73,6 +74,7 @@ class UserServiceImpl (
         userRepository.deleteById(id)
         return true
     }
+
 
     fun getUsers(): MutableList<User> {
         val list = userMapper.toDto(userRepository.findAll())

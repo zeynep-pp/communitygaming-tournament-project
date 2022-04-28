@@ -6,7 +6,6 @@ type User {
 }
 
 input RegisterInput {
-    name: String,
     username: String
     password: String
     email: String

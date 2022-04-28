@@ -3,7 +3,7 @@ package com.communitygaming.tournamentproject.graphql.type
 
 
 data class User (
-    var id: String = "",
+    var id: String,
 
     var username: String? = null,
 

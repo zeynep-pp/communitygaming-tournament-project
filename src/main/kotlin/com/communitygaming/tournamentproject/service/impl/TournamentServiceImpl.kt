@@ -1,5 +1,6 @@
 package com.communitygaming.tournamentproject.service.impl
 
+import com.communitygaming.tournamentproject.domain.UserDomain
 import com.communitygaming.tournamentproject.graphql.input.CreateTournamentInput
 import com.communitygaming.tournamentproject.graphql.type.Tournament
 import com.communitygaming.tournamentproject.repository.TournamentRepository
@@ -30,6 +31,7 @@ class TournamentServiceImpl(
         tournament = tournamentRepository.save(tournament)
         return tournamentMapper.toDto(tournament)
     }
+
 
 
     override fun partialUpdate(id:
