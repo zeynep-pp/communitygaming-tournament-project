@@ -15,7 +15,7 @@ class TournamentQuery(val tournamentRepository: TournamentRepository,
     fun tournaments(): List<Tournament> {
         val list = tournamentRepository.findAll()
         for (item in list) {
-            item.participants = getUsers(tournamentId = item.id)
+            item.participants= getUsers(tournamentId = item.id)
         }
         return list
     }
