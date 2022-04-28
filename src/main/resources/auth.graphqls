@@ -1,0 +1,14 @@
+
+type JWTToken {
+    idtoken: String!
+}
+
+input LoginInput {
+    username: String!
+    password: String!
+    isRememberMe: Boolean!
+}
+
+type Mutation {
+    authorize(loginInput: LoginInput!): JWTToken
+}
