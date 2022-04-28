@@ -1,7 +1,11 @@
 package com.communitygaming.tournamentproject.graphql.resolver.query
 
 
-import com.communitygaming.tournamentproject.domain.User
+import com.communitygaming.tournamentproject.domain.UserDomain
+import com.communitygaming.tournamentproject.graphql.type.Tournament
+import com.communitygaming.tournamentproject.graphql.type.User
+import com.communitygaming.tournamentproject.service.impl.TournamentServiceImpl
+import com.communitygaming.tournamentproject.service.impl.UserServiceImpl
 import com.coxautodev.graphql.tools.GraphQLQueryResolver
 import org.springframework.data.mongodb.core.MongoOperations
 import org.springframework.data.mongodb.core.query.Criteria
@@ -9,10 +13,14 @@ import org.springframework.data.mongodb.core.query.Query
 import org.springframework.stereotype.Component
 
 @Component
-class UserQuery(val mongoOperations: MongoOperations) : GraphQLQueryResolver {
-    fun reviews(tournamentId: String): List<User> {
-        val query = Query()
-        query.addCriteria(Criteria.where("tournamentId").`is`(tournamentId))
-        return mongoOperations.find(query, User::class.java)
+class UserQuery(private val userService: UserServiceImpl) : GraphQLQueryResolver {
+
+    fun users(): MutableList<User> {
+        return userService.getUsers()
     }
+
+    private fun getTournaments(userId: String): List<Tournament> {
+        return userService.getTournaments(userId)
+    }
+
 }

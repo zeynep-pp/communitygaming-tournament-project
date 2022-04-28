@@ -1,7 +1,7 @@
 package com.communitygaming.tournamentproject.service
 
-import com.communitygaming.tournamentproject.domain.Tournament
-import com.communitygaming.tournamentproject.graphql.input.CreateTournamentInput
+import com.communitygaming.tournamentproject.domain.TournamentDomain
+import com.communitygaming.tournamentproject.graphql.type.Tournament
 import com.communitygaming.tournamentproject.repository.TournamentRepository
 import com.communitygaming.tournamentproject.service.impl.TournamentServiceImpl
 import com.communitygaming.tournamentproject.service.mapper.TournamentMapper
@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class TournamentServiceTest {
+class TournamentDomainServiceTest {
 
     @MockK
     lateinit var tournamentRepository: TournamentRepository
@@ -30,12 +30,12 @@ class TournamentServiceTest {
 
     @Test
     fun whenGetAllTournaments_ThenReturnTournaments() {
-        val tournament = Tournament("1", "Test name")
-        val tournamentDTO = CreateTournamentInput( "Test name")
+        val tournamentDomain = TournamentDomain("1", "Test name")
+        val tournamentDTO = Tournament( "Test name")
 
         //given
-        every { tournamentRepository.findAll() } returns listOf(tournament)
-        every { tournamentMapper.toDto(tournament) } returns tournamentDTO
+        every { tournamentRepository.findAll() } returns listOf(tournamentDomain)
+        every { tournamentMapper.toDto(tournamentDomain) } returns tournamentDTO
 
         //when
         val result = tournamentServiceImpl.findAll();

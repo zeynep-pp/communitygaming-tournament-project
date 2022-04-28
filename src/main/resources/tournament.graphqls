@@ -5,8 +5,9 @@ type Tournament {
 }
 
 input CreateTournamentInput {
-    name: String
-    userIds: [String!]
+    name: String,
+    tournamentName: String!,
+    userOwnerId: String!,
 }
 
 extend type Query {
@@ -14,5 +15,6 @@ extend type Query {
 }
 
 extend type Mutation {
-    newTournament(userId: String!, tournamentName: String!, perTeamNumber:String!) : Tournament!
+    newTournament (tournament: CreateTournamentInput!): Tournament
+    deleteTournament(id: ID!): Boolean
 }

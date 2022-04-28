@@ -1,6 +1,6 @@
 package com.communitygaming.tournamentproject.security
 
-import com.communitygaming.tournamentproject.domain.User
+import com.communitygaming.tournamentproject.domain.UserDomain
 import com.communitygaming.tournamentproject.repository.UserRepository
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.*;
@@ -13,19 +13,16 @@ import java.util.stream.Collectors
 class DomainUserDetailsServiceImpl(private val userRepository: UserRepository) : UserDetailsService {
 
     override fun loadUserByUsername(username: String): UserDetails {
-        val user: User = userRepository.findByUsername(username)
+        val userDomain: UserDomain = userRepository.findByUsername(username)
             .orElseThrow { UsernameNotFoundException("User NOT Found") }
-        return createSpringSecurityUser(user)
+        return createSpringSecurityUser(userDomain)
     }
 
-    private fun createSpringSecurityUser(user: User): org.springframework.security.core.userdetails.User {
-        val authorities: List<SimpleGrantedAuthority> = user.roles!!.stream()
-            .map { role -> SimpleGrantedAuthority("ROLE_" + role.name) }.collect(Collectors.toList())
-
-        return User(
-            user.username,
-            user.password,
-            authorities
+    private fun createSpringSecurityUser(userDomain: UserDomain): org.springframework.security.core.userdetails.User {
+        return org.springframework.security.core.userdetails.User(
+            userDomain.username,
+            userDomain.password,
+            mutableListOf()
         )
     }
 }

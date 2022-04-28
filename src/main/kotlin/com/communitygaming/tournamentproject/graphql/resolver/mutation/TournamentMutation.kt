@@ -2,6 +2,7 @@ package com.communitygaming.tournamentproject.graphql.resolver.mutation
 
 
 import com.communitygaming.tournamentproject.graphql.input.CreateTournamentInput
+import com.communitygaming.tournamentproject.graphql.type.Tournament
 import com.communitygaming.tournamentproject.service.impl.TournamentServiceImpl
 import com.coxautodev.graphql.tools.GraphQLMutationResolver
 import org.springframework.stereotype.Component
@@ -16,7 +17,7 @@ class TournamentMutation (
     private val tournamentService: TournamentServiceImpl
 ) : GraphQLMutationResolver {
 
-    fun newTournament(@Valid @RequestBody tournament: CreateTournamentInput): CreateTournamentInput {
+    fun newTournament(@Valid @RequestBody tournament: CreateTournamentInput): Tournament {
         return tournamentService.save(tournament)
     }
 

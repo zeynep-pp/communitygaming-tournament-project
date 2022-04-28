@@ -7,24 +7,15 @@ import com.communitygaming.tournamentproject.domain.enums.Status
 import com.communitygaming.tournamentproject.domain.enums.Token
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.annotation.Id
-import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.mongodb.core.index.Indexed
-import org.springframework.data.mongodb.core.mapping.DBRef
-import java.time.LocalDateTime
-import java.time.ZonedDateTime
 
 
 @Document(collection = "tournament")
-data class Tournament (
+data class TournamentDomain (
 
-    @Id
-    var id: String = "",
-
-    @Indexed
     var tournamentName: String? = null,
 
-    @Indexed
-    var userOwnerId: String,
+    var userId: String? = null,
 
     var prizeTarget: String? = null,
 
@@ -37,8 +28,6 @@ data class Tournament (
     var game: Game = Game.ApexLegends,
 
     var token: Token = Token.USD,
-
-    var participants: List<User> = ArrayList(),
 
     ): AbstractAuditingEntity(){
 

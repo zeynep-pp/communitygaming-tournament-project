@@ -1,6 +1,6 @@
 package com.communitygaming.tournamentproject.repository
 
-import com.communitygaming.tournamentproject.domain.Tournament
+import com.communitygaming.tournamentproject.domain.TournamentDomain
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -8,7 +8,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
 
 @DataJpaTest
-class TournamentRepositoryTest {
+class TournamentDomainRepositoryTest {
 
     @Autowired
     lateinit var entityManager: TestEntityManager
@@ -18,14 +18,14 @@ class TournamentRepositoryTest {
 
     @Test
     fun whenFindAll_thenReturnTournaments() {
-        val tournament = Tournament()
-        tournament.tournamentName= "Test"
+        val tournamentDomain = TournamentDomain()
+        tournamentDomain.tournamentName= "Test"
 
-        entityManager.persist(tournament)
+        entityManager.persist(tournamentDomain)
         entityManager.flush()
 
         val foundTournaments = tournamentRepository.findAll()
-        assertThat(tournament == foundTournaments[0])
+        assertThat(tournamentDomain == foundTournaments[0])
     }
 
 }

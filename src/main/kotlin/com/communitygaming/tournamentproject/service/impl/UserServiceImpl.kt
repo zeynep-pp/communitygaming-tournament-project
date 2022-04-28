@@ -1,32 +1,32 @@
 package com.communitygaming.tournamentproject.service.impl
 
-import com.communitygaming.tournamentproject.domain.User
+
+import com.communitygaming.tournamentproject.graphql.input.RegisterInput
+import com.communitygaming.tournamentproject.graphql.type.Tournament
+import com.communitygaming.tournamentproject.graphql.type.User
 import com.communitygaming.tournamentproject.repository.UserRepository
 import com.communitygaming.tournamentproject.service.UserService
-import com.communitygaming.tournamentproject.graphql.input.RegisterInput
-import com.communitygaming.tournamentproject.graphql.type.UserType
+
 import com.communitygaming.tournamentproject.service.mapper.UserMapper
 import org.slf4j.LoggerFactory
 import org.springframework.cache.annotation.CacheEvict
-import org.springframework.cache.annotation.Cacheable
-import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.data.mongodb.core.MongoOperations
+import org.springframework.data.mongodb.core.query.Criteria
+import org.springframework.data.mongodb.core.query.Query
 import org.springframework.stereotype.Component
-import org.springframework.stereotype.Service
-import java.lang.RuntimeException
 import java.util.*
-import javax.transaction.Transactional
 
 @Component
 class UserServiceImpl (
     private val userRepository: UserRepository,
-    private val passwordEncoder: PasswordEncoder,
-    private val userMapper: UserMapper
+    private val userMapper: UserMapper,
+    private val mongoOperations: MongoOperations
 ) : UserService {
 
     private val log = LoggerFactory.getLogger(javaClass);
 
     @CacheEvict(value = ["tournaments"], allEntries = true)
-    override fun save(userDto: UserType): UserType {
+    override fun save(userDto: RegisterInput): User {
         log.debug("Request to save User: $userDto")
         var user = userMapper.toEntity(userDto)
         user = userRepository.save(user)
@@ -34,7 +34,7 @@ class UserServiceImpl (
     }
 
 
-    override fun partialUpdate(id: String,userDto: UserType): Optional<UserType> {
+    override fun partialUpdate(id: String,userDto: RegisterInput): Optional<User> {
         log.debug("Request to partial update User: $userDto")
 
         return userRepository.findById(id)
@@ -47,7 +47,7 @@ class UserServiceImpl (
 
     }
 
-    override fun findAll(): MutableList<UserType> {
+    override fun findAll(): List<User> {
         log.debug("Request to get all Users")
         simulateSlowService();
         return userRepository.findAll()
@@ -63,23 +63,30 @@ class UserServiceImpl (
         }
     }
 
-    override fun findOne(id: String): Optional<UserType> {
+    override fun findOne(id: String): Optional<User> {
         log.debug("Request to get User by id: $id")
         return userRepository.findById(id).map(userMapper::toDto)
     }
 
-    override fun delete(id: String) {
+    override fun delete(id: String): Boolean  {
         log.debug("Request to delete User by id : $id")
         userRepository.deleteById(id)
+        return true
     }
 
-    fun getUser(id: String): UserType {
-        val user = getUserByRepository(id)
-        return userMapper.toDto(user);
+    fun getUsers(): MutableList<User> {
+        val list = userMapper.toDto(userRepository.findAll())
+        for (item in list) {
+            item.tournaments = getTournaments(userId = item.id)
+        }
+        return list
     }
 
-    fun getUserByRepository(id: String): User {
-        return userRepository.findById(id).orElseThrow { RuntimeException(String.format("User %s not found", id))  }
+    fun getTournaments(userId: String): List<Tournament> {
+        val query = Query()
+        query.addCriteria(Criteria.where("userId").`is`(userId))
+        return mongoOperations.find(query, Tournament::class.java)
     }
+
 
 }

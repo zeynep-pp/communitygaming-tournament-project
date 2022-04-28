@@ -12,17 +12,17 @@ import org.mapstruct.NullValuePropertyMappingStrategy
  * @param E Entity type paratournament.
  */
 
-interface EntityMapper<D, E> {
+interface EntityMapper<I,E, D> {
 
-    fun toEntity(dto: D): E
+    fun toEntity(dto: I): E
 
     fun toDto(entity: E): D
 
-    fun toEntity(dtoList: MutableList<D>): MutableList<E>
+    fun toEntity(dtoList: MutableList<I>): MutableList<E>
 
     fun toDto(entityList: MutableList<E>): MutableList<D>
         
     @Named("partialUpdate")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    fun partialUpdate(@MappingTarget entity: E, dto: D)
+    fun partialUpdate(@MappingTarget entity: E, dto: I)
 }
