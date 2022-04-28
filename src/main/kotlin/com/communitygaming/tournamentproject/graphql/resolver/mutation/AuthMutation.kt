@@ -1,6 +1,7 @@
 package com.communitygaming.tournamentproject.graphql.resolver.mutation
 
 import com.communitygaming.tournamentproject.graphql.input.LoginInput
+import com.communitygaming.tournamentproject.graphql.type.JWTToken
 import com.communitygaming.tournamentproject.security.jwt.JWTFilter
 import com.communitygaming.tournamentproject.security.jwt.JWTProvider
 import com.coxautodev.graphql.tools.GraphQLMutationResolver
@@ -39,8 +40,4 @@ class AuthMutation(
         return ResponseEntity(JWTToken(jwt), httpHeaders, HttpStatus.OK)
     }
 
-    /**
-     * Object to return as body in JWT Authentication.
-     */
-    class JWTToken(@get:JsonProperty("id_token") var idToken: String?)
 }

@@ -1,6 +1,6 @@
 
 type JWTToken {
-    idtoken: String!
+    idToken: String!
 }
 
 input LoginInput {
