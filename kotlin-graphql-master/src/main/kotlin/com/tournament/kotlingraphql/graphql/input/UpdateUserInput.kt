@@ -12,7 +12,6 @@ data class UpdateUserInput(
 
     @Id
     var id: String = "",
-
     var name: String,
     var password: String,
 

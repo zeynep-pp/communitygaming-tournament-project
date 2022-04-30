@@ -16,17 +16,43 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation CreateUser($username: String!, $email: String!) {\n    createUser(\n        user: { username: $username, password: \"1234\", email: $email }\n    ) {\n        id\n        username\n        email\n        createdDate\n    }\n}",
-								"variables": "{\n  \"id\": \"6251422baa67d32f6b23aff4\",\n  \"username\": \"test\",\n  \"email\": \"test@example.com\"\n}"
+								"query": "mutation newUser($name: String,$password: String, $email: String){\n    newUser(\n        user: {name:$name , password: $password, email:$email}\n    ) {\n        id\n        name\n        password\n        email\n    }\n}",
+								"variables": "{\n  \"name\": \"User\",\n  \"password\": \"1234\",\n  \"email\": \"a@gmail.com\"\n}"
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9091/graphql",
+							"raw": "http://localhost:9000/graphql",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9091",
+							"port": "9000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation updateUser($id: ID!, $name: String,$password: String, $email: String){\n    updateUser(\n        user: {id:$id ,name:$name , password: $password, email:$email}\n    ) {\n        id\n        name\n        password\n        email\n    }\n}",
+								"variables": "{\n  \"id\":\"c47bcbdb-732c-4141-b534-037148a54d90\",\n  \"name\": \"User3\",\n  \"password\": \"1234\",\n  \"email\": \"c@gmail.com\"\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
 							"path": [
 								"graphql"
 							]
