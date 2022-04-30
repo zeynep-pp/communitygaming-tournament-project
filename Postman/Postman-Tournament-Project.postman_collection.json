@@ -16,8 +16,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation newUser($name: String,$password: String, $email: String){\n    newUser(\n        user: {name:$name , password: $password, email:$email}\n    ) {\n        id\n        name\n        password\n        email\n    }\n}",
-								"variables": "{\n  \"name\": \"User\",\n  \"password\": \"1234\",\n  \"email\": \"a@gmail.com\"\n}"
+								"query": "mutation newUser($name: String,$password: String, $email: String){\n    newUser(\n        user: {name:$name , password: $password, email:$email}\n    ) {\n        id\n        name\n        password\n        email\n        tournaments {\n            id\n            userId\n            tournamentName\n            perTeamNumber\n        }\n    }\n}",
+								"variables": "{\n  \"name\": \"User2\",\n  \"password\": \"1234\",\n  \"email\": \"n@gmail.com\"\n}"
 							}
 						},
 						"url": {
@@ -42,8 +42,37 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation updateUser($id: ID!, $name: String,$password: String, $email: String){\n    updateUser(\n        user: {id:$id ,name:$name , password: $password, email:$email}\n    ) {\n        id\n        name\n        password\n        email\n    }\n}",
-								"variables": "{\n  \"id\":\"c47bcbdb-732c-4141-b534-037148a54d90\",\n  \"name\": \"User3\",\n  \"password\": \"1234\",\n  \"email\": \"c@gmail.com\"\n}"
+								"query": "mutation updateUser($id: ID!, $name: String,$password: String, $email: String){\n    updateUser(\n        user: {id:$id ,name:$name , password: $password, email:$email}\n    ) {\n        id\n        name\n        password\n        email\n        tournaments {\n            id\n            userId\n            tournamentName\n            perTeamNumber\n        }\n    }\n}",
+								"variables": "{\n  \"id\":\"cb8a5254-095e-482b-b1d2-bc9f62ef8c21\",\n  \"name\": \"User3\",\n  \"password\": \"1234\",\n  \"email\": \"c@gmail.com\"\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation DeleteUser($id: ID!) {\n      deleteUser(id: $id)\n}",
+								"variables": "{\n  \"id\": \"cb8a5254-095e-482b-b1d2-bc9f62ef8c21\"\n}"
 							}
 						},
 						"url": {
@@ -64,7 +93,95 @@
 		},
 		{
 			"name": "Tournament",
-			"item": []
+			"item": [
+				{
+					"name": "Create Tournament",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation NewTournament($userId: String,$tournamentName: String,$perTeamNumber: String!) {\n    newTournament(tournament: { userId: $userId,tournamentName:$tournamentName,perTeamNumber:$perTeamNumber}) {\n        id\n        userId\n        tournamentName\n        perTeamNumber    \n    }\n}",
+								"variables": "{\n  \"userId\": \"76309adb-7569-4e52-800e-0e09a76e46b4\",\n  \"tournamentName\": \"tournament2\",\n  \"perTeamNumber\": \"10\"\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Tournament",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation UpdateTournament($id:ID,$userId:String,$tournamentName: String!,$perTeamNumber: String!) {\n    updateTournament(tournament: {id:$id, userId: $userId,tournamentName:$tournamentName,perTeamNumber:$perTeamNumber}) {\n        id\n        userId\n        tournamentName\n        perTeamNumber    \n    }\n}",
+								"variables": "{\n  \"id\": \"c1865a41-2161-49cf-bf67-812d3496373e\",\n  \"userId\": \"39727a77-124b-4d28-acf2-24c219540399\",\n  \"tournamentName\": \"tournament1\",\n  \"perTeamNumber\": \"20\"\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Tournament",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation DeleteTournament($id: ID!) {\n    deleteTournament(id: $id)\n}",
+								"variables": "{\n  \"id\": \"c1865a41-2161-49cf-bf67-812d3496373e\"\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

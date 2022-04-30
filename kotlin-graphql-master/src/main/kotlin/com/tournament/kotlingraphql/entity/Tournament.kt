@@ -13,6 +13,9 @@ import org.springframework.data.annotation.Id
 @Document(collection = "tournament")
 data class Tournament (
 
+        @Id
+        var id: String = "",
+
         var userId: String,
 
         var tournamentName: String? = null,

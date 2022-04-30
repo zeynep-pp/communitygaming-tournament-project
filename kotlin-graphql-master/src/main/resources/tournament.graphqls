@@ -1,17 +1,19 @@
 type Tournament {
-    userId:  ID
+    id:  ID
+    userId:  String
     tournamentName: String!
     perTeamNumber:String!
 }
 
 input CreateTournamentInput {
-    userId:  ID
-    tournamentName: String!
+    userId:  String
+    tournamentName: String
     perTeamNumber:String!
 }
 
 input UpdateTournamentInput {
-    userId:  ID
+    id:ID
+    userId:  String
     tournamentName: String!
     perTeamNumber:String!
 }
@@ -19,6 +21,7 @@ input UpdateTournamentInput {
 extend type Mutation {
     newTournament(tournament: CreateTournamentInput!): Tournament
     updateTournament(tournament: UpdateTournamentInput!): Tournament
+    deleteTournament(id: ID!) : Boolean
 }
 
 extend type Query {

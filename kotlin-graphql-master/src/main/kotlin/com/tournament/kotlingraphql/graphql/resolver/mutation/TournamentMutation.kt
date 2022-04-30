@@ -28,7 +28,7 @@ class TournamentMutation (
         return tournamentService.partialUpdate(tournament)
     }
 
-    fun deleteTournament(@NotNull @Size(min = 1, max = 50) id: String): Boolean {
+    fun deleteTournament(@NotNull id: String): Boolean {
         return tournamentService.delete(id)
     }
 

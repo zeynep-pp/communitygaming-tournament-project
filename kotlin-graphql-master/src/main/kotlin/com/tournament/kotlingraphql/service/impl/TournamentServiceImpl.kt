@@ -25,7 +25,7 @@ class TournamentServiceImpl(
 
     override fun save(tournamentDto: CreateTournamentInput): Tournament {
         log.debug("Request to save Tournament: $tournamentDto")
-        var tournament = Tournament(tournamentDto.userId,tournamentDto.tournamentName,tournamentDto.perTeamNumber)
+        var tournament = Tournament(UUID.randomUUID().toString(),tournamentDto.userId,tournamentDto.tournamentName,tournamentDto.perTeamNumber)
         tournamentRepository.save(tournament)
         return tournament
     }
@@ -34,7 +34,7 @@ class TournamentServiceImpl(
 
     override fun partialUpdate(tournamentDto: UpdateTournamentInput): Tournament {
         log.debug("Request to  update Tournament: $tournamentDto")
-        val tournament = tournamentRepository.findById(tournamentDto.userId)
+        val tournament = tournamentRepository.findById(tournamentDto.id)
         tournament.ifPresent {
             it.tournamentName = tournamentDto.tournamentName
             it.userId= tournamentDto.userId

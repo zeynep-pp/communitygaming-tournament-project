@@ -9,7 +9,7 @@ data class CreateTournamentInput(
 
     var userId: String,
 
-    var tournamentName: String? = null,
+    var tournamentName: String,
 
     var perTeamNumber: String? = null
 
