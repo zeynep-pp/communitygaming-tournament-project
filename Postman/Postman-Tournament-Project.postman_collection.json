@@ -1,0 +1,44 @@
+{
+	"info": {
+		"_postman_id": "1555f0f3-e0fe-4162-924b-815cc53058c7",
+		"name": "Postman-Tournament-Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation CreateUser($username: String!, $email: String!) {\n    createUser(\n        user: { username: $username, password: \"1234\", email: $email }\n    ) {\n        id\n        username\n        email\n        createdDate\n    }\n}",
+								"variables": "{\n  \"id\": \"6251422baa67d32f6b23aff4\",\n  \"username\": \"test\",\n  \"email\": \"test@example.com\"\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9091/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9091",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tournament",
+			"item": []
+		}
+	]
+}

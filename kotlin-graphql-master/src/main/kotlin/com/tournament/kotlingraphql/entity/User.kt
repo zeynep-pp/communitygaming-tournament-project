@@ -2,7 +2,6 @@
 
 package com.tournament.kotlingraphql.entity;
 
-import com.tournament.kotlingraphql.entity.Tournament
 import com.mongodb.lang.NonNull
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.index.Indexed

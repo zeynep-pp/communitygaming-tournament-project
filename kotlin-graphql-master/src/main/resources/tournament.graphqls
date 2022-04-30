@@ -1,16 +1,26 @@
-
-
-extend type Query {
-    tournaments(userId: ID!): [Tournament]
-}
-
 type Tournament {
-    userId:  ID!
+    userId:  ID
     tournamentName: String!
     perTeamNumber:String!
 }
 
+input CreateTournamentInput {
+    userId:  ID
+    tournamentName: String!
+    perTeamNumber:String!
+}
+
+input UpdateTournamentInput {
+    userId:  ID
+    tournamentName: String!
+    perTeamNumber:String!
+}
 
 extend type Mutation {
-    newTournament(userId: String!, tournamentName: String!, perTeamNumber:String!) : Tournament!
+    newTournament(tournament: CreateTournamentInput!): Tournament
+    updateTournament(tournament: UpdateTournamentInput!): Tournament
+}
+
+extend type Query {
+    tournaments(userId: ID!): [Tournament]
 }
