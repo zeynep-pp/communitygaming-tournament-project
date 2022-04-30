@@ -88,6 +88,35 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get  users",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetUsers {\n    users {\n        id\n        name\n        password\n        email\n        tournaments {\n            id\n            userId\n            tournamentName\n            perTeamNumber\n        }\n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -165,6 +194,64 @@
 							"graphql": {
 								"query": "mutation DeleteTournament($id: ID!) {\n    deleteTournament(id: $id)\n}",
 								"variables": "{\n  \"id\": \"c1865a41-2161-49cf-bf67-812d3496373e\"\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tournament",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetTournament($userId: String) {\n    tournamentsByUserId(userId: $userId) {\n        id\n        userId\n        tournamentName\n        perTeamNumber  \n    }\n}",
+								"variables": "{\n  \"userId\": \"76309adb-7569-4e52-800e-0e09a76e46b4\"\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tournaments",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetTournaments {\n    tournaments {\n        id\n        userId\n        tournamentName\n        perTeamNumber  \n    }\n}",
+								"variables": ""
 							}
 						},
 						"url": {

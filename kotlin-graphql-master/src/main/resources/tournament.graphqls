@@ -25,5 +25,6 @@ extend type Mutation {
 }
 
 extend type Query {
-    tournaments(userId: ID!): [Tournament]
+    tournamentsByUserId(userId: String): [Tournament]
+    tournaments: [Tournament]
 }

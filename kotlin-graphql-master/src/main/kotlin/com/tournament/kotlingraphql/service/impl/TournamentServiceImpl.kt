@@ -76,4 +76,5 @@ class TournamentServiceImpl(
         query.addCriteria(Criteria.where("userId").`is`(userId))
         return mongoOperations.find(query, Tournament::class.java)
     }
+
 }
