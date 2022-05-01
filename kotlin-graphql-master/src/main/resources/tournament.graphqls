@@ -3,12 +3,42 @@ type Tournament {
     userId:  String
     tournamentName: String!
     perTeamNumber:String!
+    bracketType: BracketType!
+    status: Status!,
+    region: Region!,
+    game: Game!,
+    token: Token!
+}
+
+enum Token {
+    BinanceCoin, USD, Ether
+}
+
+enum Game {
+    ApexLegends, Dota, PubgMobile
+}
+
+enum Region {
+    EastAsia, Turkey, Europe
+}
+
+enum Status {
+    Live, New, Past
+}
+
+enum BracketType {
+    SingleElimination, DoubleElimination, RoundRobin, BattleRoyal, Swiss
 }
 
 input CreateTournamentInput {
     userId:  String
     tournamentName: String
     perTeamNumber:String!
+    bracketType: BracketType!
+    status: Status!,
+    region: Region!,
+    game: Game!,
+    token: Token!
 }
 
 input UpdateTournamentInput {

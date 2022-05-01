@@ -134,8 +134,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation NewTournament($userId: String,$tournamentName: String,$perTeamNumber: String!) {\n    newTournament(tournament: { userId: $userId,tournamentName:$tournamentName,perTeamNumber:$perTeamNumber}) {\n        id\n        userId\n        tournamentName\n        perTeamNumber    \n    }\n}",
-								"variables": "{\n  \"userId\": \"76309adb-7569-4e52-800e-0e09a76e46b4\",\n  \"tournamentName\": \"tournament2\",\n  \"perTeamNumber\": \"10\"\n}"
+								"query": "mutation NewTournament($userId: String,$tournamentName: String,$perTeamNumber: String!,$bracketType: BracketType!,$status: Status!,$region: Region!,$game: Game!,$token: Token!) {\n    newTournament(tournament: { userId: $userId,tournamentName:$tournamentName,perTeamNumber:$perTeamNumber,bracketType:$bracketType,status:$status,region:$region,game:$game,token:$token,}) {\n        id\n        userId\n        tournamentName\n        perTeamNumber \n        bracketType \n        status\n        region\n        game\n        token  \n    }\n}",
+								"variables": "{\n  \"userId\": \"76309adb-7569-4e52-800e-0e09a76e46b4\",\n  \"tournamentName\": \"tournament2\",\n  \"perTeamNumber\": \"10\",\n  \"bracketType\": \"SingleElimination\",\n  \"status\": \"New\",\n  \"region\": \"Turkey\",\n  \"game\": \"Dota\",\n  \"token\": \"USD\"\n}"
 							}
 						},
 						"url": {

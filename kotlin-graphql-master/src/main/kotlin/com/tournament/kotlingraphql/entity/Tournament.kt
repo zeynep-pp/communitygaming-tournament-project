@@ -2,10 +2,7 @@
 package com.tournament.kotlingraphql.entity;
 
 import com.tournament.kotlingraphql.entity.database.AbstractAuditingEntity
-import com.tournament.kotlingraphql.entity.enums.BracketType
-import com.tournament.kotlingraphql.entity.enums.Game
-import com.tournament.kotlingraphql.entity.enums.Status
-import com.tournament.kotlingraphql.entity.enums.Token
+import com.tournament.kotlingraphql.entity.enums.*
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.annotation.Id
 
@@ -20,16 +17,17 @@ data class Tournament (
 
         var tournamentName: String? = null,
 
-        var perTeamNumber: String? = null
+        var perTeamNumber: String? = null,
 
-        /*
-        var bracketType: BracketType = BracketType.SingleElimination,
+        var bracketType: BracketType ? = null,
 
-        var status: Status = Status.New,
+        var status: Status? = null,
 
-        var game: Game = Game.ApexLegends,
+        var region: Region? = null,
 
-        var token: Token = Token.USD*/
+        var game: Game? = null,
+
+        var token: Token? = null
 
 
 )

@@ -25,7 +25,8 @@ class TournamentServiceImpl(
 
     override fun save(tournamentDto: CreateTournamentInput): Tournament {
         log.debug("Request to save Tournament: $tournamentDto")
-        var tournament = Tournament(UUID.randomUUID().toString(),tournamentDto.userId,tournamentDto.tournamentName,tournamentDto.perTeamNumber)
+        var tournament = Tournament(UUID.randomUUID().toString(),tournamentDto.userId,tournamentDto.tournamentName,tournamentDto.perTeamNumber,
+            tournamentDto.bracketType,tournamentDto.status,tournamentDto.region,tournamentDto.game,tournamentDto.token)
         tournamentRepository.save(tournament)
         return tournament
     }
