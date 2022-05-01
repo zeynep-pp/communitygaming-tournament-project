@@ -4,6 +4,8 @@ type User {
     password: String
     email: String
     tournaments: [Tournament]
+    createdAt: String,
+    updatedAt: String
 }
 
 input CreateUserInput {

@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.MongoOperations
 import org.springframework.data.mongodb.core.query.Criteria
 import org.springframework.data.mongodb.core.query.Query
 import org.springframework.stereotype.Component
+import java.time.LocalDateTime
 import java.util.*
 
 @Component
@@ -23,8 +24,7 @@ class UserServiceImpl (
     
 
     override fun save(userDto: CreateUserInput): User {
-        val user = User(userDto.name, userDto.password, userDto.email )
-        user.id = UUID.randomUUID().toString()
+        val user = User(UUID.randomUUID().toString(),userDto.name, userDto.password, userDto.email)
         return userRepository.save(user)
     }
 

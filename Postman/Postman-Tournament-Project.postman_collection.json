@@ -16,8 +16,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation newUser($name: String,$password: String, $email: String){\n    newUser(\n        user: {name:$name , password: $password, email:$email}\n    ) {\n        id\n        name\n        password\n        email\n        tournaments {\n            id\n            userId\n            tournamentName\n            perTeamNumber\n        }\n    }\n}",
-								"variables": "{\n  \"name\": \"User2\",\n  \"password\": \"1234\",\n  \"email\": \"n@gmail.com\"\n}"
+								"query": "mutation newUser($name: String,$password: String, $email: String){\n    newUser(\n        user: {name:$name , password: $password, email:$email}\n    ) {\n        id\n        name\n        password\n        email\n        tournaments {\n            id\n            userId\n            tournamentName\n            perTeamNumber\n        }\n        createdAt,\n        updatedAt\n    }\n}",
+								"variables": "{\n  \"name\": \"User3\",\n  \"password\": \"1234\",\n  \"email\": \"user3@gmail.com\"\n}"
 							}
 						},
 						"url": {
@@ -42,7 +42,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation updateUser($id: ID!, $name: String,$password: String, $email: String){\n    updateUser(\n        user: {id:$id ,name:$name , password: $password, email:$email}\n    ) {\n        id\n        name\n        password\n        email\n        tournaments {\n            id\n            userId\n            tournamentName\n            perTeamNumber\n        }\n    }\n}",
+								"query": "mutation updateUser($id: ID!, $name: String,$password: String, $email: String){\n    updateUser(\n        user: {id:$id ,name:$name , password: $password, email:$email}\n    ) {\n        id\n        name\n        password\n        email\n        tournaments {\n            id\n            userId\n            tournamentName\n            perTeamNumber\n        }\n        createdAt\n        updatedAt\n    }\n}",
 								"variables": "{\n  \"id\":\"cb8a5254-095e-482b-b1d2-bc9f62ef8c21\",\n  \"name\": \"User3\",\n  \"password\": \"1234\",\n  \"email\": \"c@gmail.com\"\n}"
 							}
 						},
@@ -100,7 +100,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query GetUsers {\n    users {\n        id\n        name\n        password\n        email\n        tournaments {\n            id\n            userId\n            tournamentName\n            perTeamNumber\n        }\n    }\n}",
+								"query": "query GetUsers {\n    users {\n        id\n        name\n        password\n        email\n        tournaments {\n            id\n            userId\n            tournamentName\n            perTeamNumber\n        }\n        createdAt\n        updatedAt\n    }\n}",
 								"variables": ""
 							}
 						},

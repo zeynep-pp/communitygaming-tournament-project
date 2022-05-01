@@ -8,15 +8,12 @@ import javax.validation.constraints.Size
 
 data class RegisterInput(
     @field:NotNull
-    @field:Size(min = 1, max = 50)
     var username: String,
 
     @field:NotNull
-    @field:Size(min = 1, max = 50)
     var password: String,
 
     @field:Email
-    @field:Size(min = 1, max = 50)
     @Indexed
     var email: String
 )

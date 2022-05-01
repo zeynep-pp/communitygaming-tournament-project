@@ -4,6 +4,7 @@ import com.mongodb.lang.NonNull
 import com.tournament.kotlingraphql.entity.Tournament
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.index.Indexed
+import java.time.LocalDateTime
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
