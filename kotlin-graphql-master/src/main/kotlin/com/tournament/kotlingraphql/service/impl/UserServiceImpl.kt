@@ -24,7 +24,7 @@ class UserServiceImpl (
     
 
     override fun save(userDto: CreateUserInput): User {
-        val user = User(UUID.randomUUID().toString(),userDto.name, userDto.password, userDto.email)
+        val user = User(UUID.randomUUID().toString(),userDto.username, userDto.password, userDto.email)
         return userRepository.save(user)
     }
 
@@ -37,7 +37,7 @@ class UserServiceImpl (
         log.debug("Request to  update User: $userDto")
         val user = userRepository.findById(userDto.id)
         user.ifPresent {
-            it.name = userDto.name
+            it.username = userDto.username
             it.email= userDto.email
             it.password=userDto.password
             userRepository.save(it)

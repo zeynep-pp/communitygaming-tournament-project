@@ -1,6 +1,6 @@
 type User {
     id: ID!
-    name: String
+    username: String
     password: String
     email: String
     tournaments: [Tournament]
@@ -9,14 +9,14 @@ type User {
 }
 
 input CreateUserInput {
-    name: String
+    username: String
     password: String
     email: String
 }
 
 input UpdateUserInput {
     id: ID!
-    name: String
+    username: String
     password: String
     email: String
 }

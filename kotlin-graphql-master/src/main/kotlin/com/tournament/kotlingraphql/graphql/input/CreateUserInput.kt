@@ -11,7 +11,7 @@ import javax.validation.constraints.Size
 
 data class CreateUserInput(
 
-    var name: String,
+    var username: String,
     var password: String,
 
     @Indexed(unique=true)

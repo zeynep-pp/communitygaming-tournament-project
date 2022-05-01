@@ -12,7 +12,7 @@ data class UpdateUserInput(
 
     @Id
     var id: String = "",
-    var name: String,
+    var username: String,
     var password: String,
 
     @Indexed(unique=true)
