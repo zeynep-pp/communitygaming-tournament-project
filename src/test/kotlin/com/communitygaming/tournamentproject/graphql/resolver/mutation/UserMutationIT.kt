@@ -17,7 +17,7 @@ internal class UserMutationIT {
 
     @Test
     @Throws(IOException::class)
-    fun createUser() {
+    fun newUser() {
         val response = graphQLTestTemplate.postForResource("new-user.graphql")
         Assertions.assertThat(response.isOk).isTrue
         Assertions.assertThat(response["$.data.newUser.id"]).isNotNull

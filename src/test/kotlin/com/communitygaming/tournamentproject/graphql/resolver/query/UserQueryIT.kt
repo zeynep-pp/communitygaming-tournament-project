@@ -31,7 +31,7 @@ internal class UserQueryIT {
 
     @Test
     @Throws(IOException::class)
-    fun getUsers() {
+    fun users() {
         userRepository.save(userEntity)
 
         val response = graphQLTestTemplate.postForResource("get-users.graphql")
