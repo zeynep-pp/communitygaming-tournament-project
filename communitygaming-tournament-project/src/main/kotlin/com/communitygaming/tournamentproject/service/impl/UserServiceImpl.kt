@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.MongoOperations
 import org.springframework.data.mongodb.core.query.Criteria
 import org.springframework.data.mongodb.core.query.Query
 import org.springframework.stereotype.Component
+import java.lang.RuntimeException
 import java.util.*
 
 @Component
@@ -23,6 +24,14 @@ class UserServiceImpl (
     
 
     override fun save(userDto: CreateUserInput): User {
+        if (userRepository.existsOneByUsername(userDto.username!!)) {
+            throw RuntimeException(
+                String.format("Username %s already exists", userDto.username));
+        }
+        if (userRepository.existsOneByEmail(userDto.email!!)) {
+            throw RuntimeException(
+                String.format("Email %s already exists", userDto.email));
+        }
         val user = User(UUID.randomUUID().toString(),userDto.username, userDto.password, userDto.email)
         return userRepository.save(user)
     }

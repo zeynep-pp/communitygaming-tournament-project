@@ -1,4 +1,4 @@
-package io.github.susimsek.tournamentbackend.security.jwt
+package com.communitygaming.tournamentproject.security.jwt
 
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.web.authentication.WebAuthenticationDetails

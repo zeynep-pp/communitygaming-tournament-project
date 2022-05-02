@@ -1,4 +1,4 @@
-package io.github.susimsek.tournamentbackend.security
+package com.communitygaming.tournamentproject.security
 
 import org.springframework.data.domain.AuditorAware
 import org.springframework.stereotype.Component

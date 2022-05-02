@@ -10,7 +10,6 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
 import org.springframework.stereotype.Component
-import org.springframework.util.ObjectUtils
 import java.nio.charset.StandardCharsets
 import java.security.Key
 import java.util.*
@@ -20,9 +19,9 @@ import javax.servlet.http.HttpServletRequest
 private const val INVALID_JWT_TOKEN = "Invalid JWT token."
 
 @Component
-@EnableConfigurationProperties(TokenProperties::class)
-class JWTTokenProvider(
-    private val tokenProperties: TokenProperties
+@EnableConfigurationProperties(JWTProperties::class)
+class JWTProvider(
+    private val jwtProperties: JWTProperties
 ) {
 
     private val log = LoggerFactory.getLogger(javaClass)
@@ -35,11 +34,11 @@ class JWTTokenProvider(
 
     init {
         val keyBytes: ByteArray
-        var secret = tokenProperties.base64Secret
+        var secret = jwtProperties.base64Secret
         keyBytes = Decoders.BASE64.decode(secret)
         this.key = Keys.hmacShaKeyFor(keyBytes)
         this.jwtParser = Jwts.parserBuilder().setSigningKey(key).build()
-        this.tokenValidityInMilliseconds = 1000 * tokenProperties.tokenValidityInSeconds
+        this.tokenValidityInMilliseconds = 1000 * jwtProperties.tokenValidityInSeconds
     }
 
     fun createToken(authentication: Authentication): String {

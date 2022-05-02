@@ -1,7 +1,7 @@
-package io.github.susimsek.tournamentbackend.security
+package com.communitygaming.tournamentproject.security
 
-import io.github.susimsek.tournamentbackend.domain.UserEntity
-import io.github.susimsek.tournamentbackend.repository.UserRepository
+import com.communitygaming.tournamentproject.domain.User
+import com.communitygaming.tournamentproject.repository.UserRepository
 import org.slf4j.LoggerFactory
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
@@ -24,7 +24,7 @@ class DomainUserDetailsService(private val userRepository: UserRepository) : Use
             .orElseThrow { UsernameNotFoundException("User $lowercaseUsername was not found in the database") }
     }
 
-    private fun createSpringSecurityUser(user: UserEntity)
+    private fun createSpringSecurityUser(user: User)
         : org.springframework.security.core.userdetails.User {
         return org.springframework.security.core.userdetails.User(
             user.id!!,

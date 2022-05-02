@@ -1,4 +1,4 @@
-package io.github.susimsek.tournamentbackend.config
+package com.communitygaming.tournamentproject.config
 
 
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
@@ -17,39 +17,18 @@ import java.util.*
 
 
 @Configuration(proxyBeanMethods = false)
-@EnableMongoRepositories("io.github.susimsek.tournamentbackend.repository")
+@EnableMongoRepositories("com.communitygaming.tournamentproject.repository")
 @Import(value = [MongoAutoConfiguration::class])
 @EnableMongoAuditing(
-    auditorAwareRef = "springSecurityAuditorAware",
-    dateTimeProviderRef = "dateTimeProvider")
+    auditorAwareRef = "springSecurityAuditorAware")
 class DatabaseConfig {
 
     @Bean
     fun mongoCustomConversions() =
         MongoCustomConversions(
             mutableListOf<Converter<*, *>>(
-                ZonedDateTimeReadConverter(),
-                ZonedDateTimeWriteConverter()
             )
         )
 
-    @Bean
-    fun dateTimeProvider(clock: Clock): DateTimeProvider {
-        return DateTimeProvider { Optional.of(ZonedDateTime.now(clock)) }
-    }
-
-    internal class ZonedDateTimeWriteConverter :
-        Converter<ZonedDateTime, Date> {
-        override fun convert(source: ZonedDateTime): Date {
-            return Date.from(source.toInstant())
-        }
-    }
-
-    internal class ZonedDateTimeReadConverter :
-        Converter<Date, ZonedDateTime> {
-        override fun convert(source: Date): ZonedDateTime {
-            return ZonedDateTime.ofInstant(source.toInstant(), ZoneId.systemDefault())
-        }
-    }
 
 }

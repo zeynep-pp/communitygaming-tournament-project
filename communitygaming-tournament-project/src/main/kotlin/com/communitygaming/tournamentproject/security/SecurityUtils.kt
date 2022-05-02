@@ -1,6 +1,6 @@
 @file:JvmName("SecurityUtils")
 
-package io.github.susimsek.tournamentbackend.security
+package com.communitygaming.tournamentproject.security
 
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder

@@ -1,14 +1,13 @@
 
 type JWTToken {
-    idToken: String!
+    idToken: String
 }
 
 input LoginInput {
     username: String!
     password: String!
-    isRememberMe: Boolean!
 }
 
 extend type Mutation {
-    login(loginInput: LoginInput): JWTToken
+    login(loginInput: LoginInput!): JWTToken
 }

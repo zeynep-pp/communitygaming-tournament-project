@@ -16,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 class SecurityConfiguration(
-    private val tokenProvider: JWTProvider
+    private val jwtProvider: JWTProvider
 ) : WebSecurityConfigurerAdapter() {
 
     @Bean
@@ -33,13 +33,14 @@ class SecurityConfiguration(
             .and()
             .csrf().disable()
             .authorizeRequests()
-            .antMatchers("/graphqla").permitAll()
-            .antMatchers("/graphqla").authenticated()
+            .antMatchers("/graphql").permitAll()
+            //.antMatchers("/graphql").authenticated()
+            .anyRequest().authenticated()
             .and()
             .httpBasic()
             .and()
             .apply(securityConfigurerAdapter())
     }
 
-    private fun securityConfigurerAdapter() = JWTConfigurer(tokenProvider)
+    private fun securityConfigurerAdapter() = JWTConfigurer(jwtProvider)
 }

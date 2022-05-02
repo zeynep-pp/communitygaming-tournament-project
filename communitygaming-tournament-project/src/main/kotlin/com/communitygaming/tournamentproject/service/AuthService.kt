@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class AuthService (
-    private val tokenProvider: JWTProvider,
+    private val jwtProvider: JWTProvider,
     private val authenticationManagerBuilder: AuthenticationManagerBuilder
 )  {
 
@@ -20,7 +20,8 @@ class AuthService (
 
         val authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken)
         SecurityContextHolder.getContext().authentication = authentication
-        val jwt = tokenProvider.createToken(authentication, loginInput.isRememberMe ?: false)
+        val jwt = jwtProvider.createToken(authentication)
         return JWTToken(jwt)
     }
+
 }
