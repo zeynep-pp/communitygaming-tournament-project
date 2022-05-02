@@ -1,19 +1,11 @@
 package com.communitygaming.tournamentproject.security.jwt
 
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.stereotype.Component
+import org.springframework.boot.context.properties.ConfigurationProperties
 
-
-@Component
-class JWTProperties {
-
-    @Value("\${jwt.token.validity.in.seconds}")
-    var tokenValidityInMilliseconds: Long = 0
-
-    @Value("\${jwt.token.validity.in.seconds.for.remember.me}")
-    var tokenValidityInMillisecondsForRememberMe: Long = 0
-
-    @Value("\${jwt.base64.secret}")
+@ConfigurationProperties("security.token")
+data class TokenProperties (
+    var tokenValidityInSeconds: Long = 1800L,
     var base64Secret: String? = null
 
-}
+)

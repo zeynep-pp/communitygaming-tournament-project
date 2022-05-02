@@ -1,5 +1,6 @@
+@file:JvmName("SecurityUtils")
 
-package com.communitygaming.tournamentproject.security
+package io.github.susimsek.tournamentbackend.security
 
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
@@ -27,4 +28,30 @@ fun extractPrincipal(authentication: Authentication?): String? {
         is String -> principal
         else -> null
     }
+}
+
+
+/**
+ * Get the JWT of the current user.
+ *
+ * @return the JWT of the current user.
+ */
+fun getCurrentUserJWT(): Optional<String> =
+    Optional.ofNullable(SecurityContextHolder.getContext().authentication)
+        .filter { it.credentials is String }
+        .map { it.credentials as String }
+
+/**
+ * Check if a user is authenticated.
+ *
+ * @return true if the user is authenticated, false otherwise.
+ */
+fun isAuthenticated(): Boolean {
+    val authentication = SecurityContextHolder.getContext().authentication
+
+    if (authentication != null) {
+        return true
+    }
+
+    return false
 }
