@@ -1,5 +1,6 @@
 package com.communitygaming.tournamentproject.config
 
+
 import com.communitygaming.tournamentproject.security.jwt.JWTConfigurer
 import com.communitygaming.tournamentproject.security.jwt.JWTProvider
 import org.springframework.context.annotation.Bean
@@ -15,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 class SecurityConfiguration(
-    private val tokenProvider: JWTProvider,
+    private val tokenProvider: JWTProvider
 ) : WebSecurityConfigurerAdapter() {
 
     @Bean

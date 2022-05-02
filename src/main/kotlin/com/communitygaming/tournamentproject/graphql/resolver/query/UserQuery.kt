@@ -1,15 +1,11 @@
 package com.communitygaming.tournamentproject.graphql.resolver.query
 
 
-import com.communitygaming.tournamentproject.domain.UserDomain
-import com.communitygaming.tournamentproject.graphql.type.Tournament
-import com.communitygaming.tournamentproject.graphql.type.User
-import com.communitygaming.tournamentproject.service.impl.TournamentServiceImpl
+
+import com.communitygaming.tournamentproject.domain.Tournament
+import com.communitygaming.tournamentproject.domain.User
 import com.communitygaming.tournamentproject.service.impl.UserServiceImpl
-import com.coxautodev.graphql.tools.GraphQLQueryResolver
-import org.springframework.data.mongodb.core.MongoOperations
-import org.springframework.data.mongodb.core.query.Criteria
-import org.springframework.data.mongodb.core.query.Query
+import graphql.kickstart.tools.GraphQLQueryResolver
 import org.springframework.stereotype.Component
 
 @Component

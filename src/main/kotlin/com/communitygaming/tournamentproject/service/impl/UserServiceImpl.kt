@@ -1,17 +1,12 @@
 package com.communitygaming.tournamentproject.service.impl
 
-
-import com.communitygaming.tournamentproject.domain.UserDomain
-import com.communitygaming.tournamentproject.graphql.input.CreateTournamentInput
-import com.communitygaming.tournamentproject.graphql.input.RegisterInput
-import com.communitygaming.tournamentproject.graphql.type.Tournament
-import com.communitygaming.tournamentproject.graphql.type.User
+import com.communitygaming.tournamentproject.graphql.input.CreateUserInput
+import com.communitygaming.tournamentproject.domain.Tournament
+import com.communitygaming.tournamentproject.domain.User
+import com.communitygaming.tournamentproject.graphql.input.UpdateUserInput
 import com.communitygaming.tournamentproject.repository.UserRepository
 import com.communitygaming.tournamentproject.service.UserService
-
-import com.communitygaming.tournamentproject.service.mapper.UserMapper
 import org.slf4j.LoggerFactory
-import org.springframework.cache.annotation.CacheEvict
 import org.springframework.data.mongodb.core.MongoOperations
 import org.springframework.data.mongodb.core.query.Criteria
 import org.springframework.data.mongodb.core.query.Query
@@ -21,44 +16,38 @@ import java.util.*
 @Component
 class UserServiceImpl (
     private val userRepository: UserRepository,
-    private val userMapper: UserMapper,
     private val mongoOperations: MongoOperations
 ) : UserService {
 
     private val log = LoggerFactory.getLogger(javaClass);
+    
 
-    /*
-    override fun save(userDto: RegisterInput): User {
-        val user = UserDomain(userDto.username, userDto.password, userDto.email )
-        user.id = UUID.randomUUID().toString()
-        userRepository.save(user)
-        return userMapper.toDto(user)
-    }*/
-
-    override fun save(userDto: RegisterInput): User {
-        var user = userMapper.toEntity(userDto)
-        user = userRepository.save(user)
-        return userMapper.toDto(user)
+    override fun save(userDto: CreateUserInput): User {
+        val user = User(UUID.randomUUID().toString(),userDto.username, userDto.password, userDto.email)
+        return userRepository.save(user)
     }
 
-    override fun partialUpdate(id: String,userDto: RegisterInput): Optional<User> {
-        log.debug("Request to partial update User: $userDto")
+    fun deleteUser(id:String): Boolean {
+        userRepository.deleteById(id)
+        return true
+    }
 
-        return userRepository.findById(id)
-            .map {
-                userMapper.partialUpdate(it, userDto)
-                it
-            }
-            .map { userRepository.save(it) }
-            .map { userMapper.toDto(it) }
-
+    override fun updateUser(userDto: UpdateUserInput): User {
+        log.debug("Request to  update User: $userDto")
+        val user = userRepository.findById(userDto.id)
+        user.ifPresent {
+            it.username = userDto.username
+            it.email= userDto.email
+            it.password=userDto.password
+            userRepository.save(it)
+        }
+        return user.get()
     }
 
     override fun findAll(): List<User> {
         log.debug("Request to get all Users")
         simulateSlowService();
         return userRepository.findAll()
-            .mapTo(mutableListOf(), userMapper::toDto)
     }
 
     private fun simulateSlowService() {
@@ -72,7 +61,7 @@ class UserServiceImpl (
 
     override fun findOne(id: String): Optional<User> {
         log.debug("Request to get User by id: $id")
-        return userRepository.findById(id).map(userMapper::toDto)
+        return userRepository.findById(id)
     }
 
     override fun delete(id: String): Boolean  {
@@ -83,7 +72,7 @@ class UserServiceImpl (
 
 
     fun getUsers(): MutableList<User> {
-        val list = userMapper.toDto(userRepository.findAll())
+        val list = userRepository.findAll()
         for (item in list) {
             item.tournaments = getTournaments(userId = item.id)
         }
@@ -95,6 +84,7 @@ class UserServiceImpl (
         query.addCriteria(Criteria.where("userId").`is`(userId))
         return mongoOperations.find(query, Tournament::class.java)
     }
+
 
 
 }

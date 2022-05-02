@@ -1,0 +1,17 @@
+# Get All user
+query GetUsers {
+    users {
+        id
+        username
+        password
+        email
+        tournaments {
+            id
+            userId
+            tournamentName
+            perTeamNumber
+        }
+        createdAt
+        updatedAt
+    }
+}

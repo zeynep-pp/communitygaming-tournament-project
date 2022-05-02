@@ -5,7 +5,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
 	kotlin("jvm") version "1.6.21"
 	kotlin("plugin.spring") version "1.6.21"
-	kotlin("kapt") version "1.4.32"
+	//kotlin("kapt") version "1.4.32"
 }
 
 group = "com.communitygaming"
@@ -47,16 +47,12 @@ dependencies {
 	implementation("org.mongodb:mongo-java-driver:3.12.10")
 	implementation("javax.transaction:javax.transaction-api:1.2")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
-	//implementation("com.graphql-java-kickstart:graphql-java-tools:12.0.2")
-	implementation("com.coxautodev:graphql-java-tools:2.1.2")
+	implementation("com.graphql-java-kickstart:graphql-java-tools:12.0.2")
+	//implementation("com.coxautodev:graphql-java-tools:2.1.2")
 	implementation("com.graphql-java:graphql-java-tools:5.2.4")
-	//implementation("com.graphql-java:graphql-spring-boot-starter:5.0.2")
+	implementation("com.graphql-java:graphql-spring-boot-starter:5.0.2")
+	implementation("com.graphql-java:graphql-spring-boot-starter-test:5.0.2")
 
-
-
-	compileOnly("org.projectlombok:lombok")
-	developmentOnly("org.springframework.boot:spring-boot-devtools")
-	annotationProcessor("org.projectlombok:lombok")
 
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.2")
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.2")
@@ -74,8 +70,9 @@ dependencies {
 		exclude(module = "mockito-core")
 	}
 	testImplementation("com.ninja-squad:springmockk:3.0.1")
+	testImplementation("com.graphql-java-kickstart:graphql-spring-boot-starter-test:12.0.0")
 
-	kapt("org.mapstruct:mapstruct-processor:1.4.2.Final")
+	//kapt("org.mapstruct:mapstruct-processor:1.4.2.Final")
 }
 
 dependencyManagement {

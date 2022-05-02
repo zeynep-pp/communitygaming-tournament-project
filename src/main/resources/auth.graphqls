@@ -9,6 +9,6 @@ input LoginInput {
     isRememberMe: Boolean!
 }
 
-type Mutation {
-    authorize(loginInput: LoginInput!): JWTToken
+extend type Mutation {
+    login(loginInput: LoginInput): JWTToken
 }

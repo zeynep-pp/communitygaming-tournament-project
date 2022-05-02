@@ -1,0 +1,19 @@
+# New user
+mutation newUser {
+    newUser(
+        user: {username:"UserTest" , password: "test", email:"usertest@gmail.com"}
+    ) {
+        id
+        username
+        password
+        email
+        tournaments {
+            id
+            userId
+            tournamentName
+            perTeamNumber
+        }
+        createdAt
+        updatedAt
+    }
+}

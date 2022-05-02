@@ -4,5 +4,5 @@ import com.fasterxml.jackson.annotation.JsonFormat
 
 @JsonFormat(shape = JsonFormat.Shape.STRING)
 enum class Token {
-    BinanaceCoin, USD, Ether
+    BinanceCoin, USD, Ether
 }

@@ -1,18 +1,25 @@
 package com.communitygaming.tournamentproject.graphql.input
 
-import org.springframework.data.annotation.Id
-import javax.validation.constraints.NotNull
-import javax.validation.constraints.Size
+import com.communitygaming.tournamentproject.domain.enums.*
 
 
 data class CreateTournamentInput(
 
-    @field:NotNull
-    @field:Size(min = 1, max = 50)
-    var tournamentName: String? = null,
+    var userId: String,
 
-    @field:NotNull
-    @field:Size(min = 1, max = 50)
-    var userId: String? = null,
+    var tournamentName: String,
+
+    var perTeamNumber: String? = null,
+
+    var bracketType: BracketType? = null,
+
+    var status: Status? = null,
+
+    var region: Region? = null,
+
+    var game: Game? = null,
+
+    var token: Token? = null
+
 
 )
